@@ -8,41 +8,32 @@ public class VRPointerInteraction : MonoBehaviour
     private CircularMotion circularMotion;
     private VRPointerAndHandMover pointerColorChange;
     public bool isRotating = false;
-    public XRNode xrNode = XRNode.RightHand; 
-
-
+    public XRNode xrNode = XRNode.RightHand;
 
     void Start()
     {
         circularMotion = GetComponent<CircularMotion>();
-        if (circularMotion != null)
-        {
-            circularMotion.enabled = false; // Disable rotation at start
-        }
+        circularMotion.enabled = false; // Disable rotation at start
 
         pointerColorChange = GetComponent<VRPointerAndHandMover>();
-        if (pointerColorChange == null)
-        {
-            Debug.LogError("VRPointerColorChange component not found!");
-        }
+        
     }
 
     void Update()
     {
-        if (pointerColorChange == null) return;
-
         // Check if the sphere is being pointed at
         bool isPointingAtObject = pointerColorChange.colorChanged;
 
-        // Get the input device
-        InputDevice device = InputDevices.GetDeviceAtXRNode(xrNode);
-
         // Check if the trigger is pressed
-        if (device.TryGetFeatureValue(CommonUsages.triggerButton, out bool isTriggerPressed))
+        if (isPointingAtObject)
         {
-            if (isTriggerPressed && !isRotating && isPointingAtObject)
+            InputDevice device = InputDevices.GetDeviceAtXRNode(xrNode);
+            if (device.TryGetFeatureValue(CommonUsages.triggerButton, out bool isTriggerPressed))
             {
-                StartRotation();
+                if (isTriggerPressed && !isRotating)
+                {
+                    StartRotation();
+                }
             }
         }
     }
@@ -67,12 +58,13 @@ public class VRPointerInteraction : MonoBehaviour
         }
     }
 
+    
     public void OnSelectEnter(SelectEnterEventArgs args)
     {
         if (circularMotion != null)
         {
             isRotating = true;
-            circularMotion.enabled = true; // Enable rotation
+            circularMotion.enabled = true; 
             circularMotion.StartPointing();
         }
     }
@@ -85,6 +77,7 @@ public class VRPointerInteraction : MonoBehaviour
             circularMotion.enabled = false; // Disable rotation
         }
     }
+    
 
     public void OnHoverEnter(HoverEnterEventArgs args)
     {

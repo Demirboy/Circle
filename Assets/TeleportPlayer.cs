@@ -1,23 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.XR.CoreUtils;
 
 public class TeleportPlayer : MonoBehaviour
 {
-    public Transform player; 
-    public Transform targetLocation; 
+    public XROrigin xrOrigin;
+    public Transform target;
+    private int timesReset = 0;
 
-    
     public void Teleport()
     {
-        if (player != null && targetLocation != null)
-        {
-            player.position = targetLocation.position;
-            player.rotation = targetLocation.rotation;
-        }
-        else
-        {
-            Debug.LogWarning("Player or target location is not assigned.");
-        }
+        
+        xrOrigin.MoveCameraToWorldLocation(target.position);
+        xrOrigin.MatchOriginUpCameraForward(target.up, target.forward);
+        Debug.Log("Position reset " + timesReset);
+        timesReset = +1;
     }
 }

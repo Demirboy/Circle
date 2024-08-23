@@ -8,7 +8,6 @@ public class VRPointerColorChange : MonoBehaviour
     public Color highlightColor = Color.red; // Color when the sphere is highlighted
     public bool colorChanged = false;
 
-
     private VRPointerInteraction vrPointerInteraction;
     public XRRayInteractor rayInteractor;
 
@@ -16,53 +15,33 @@ public class VRPointerColorChange : MonoBehaviour
     {
         sphereRenderer = GetComponent<Renderer>();
         vrPointerInteraction = GetComponent<VRPointerInteraction>();
-
-        if (sphereRenderer != null)
-        {
-            originalColor = sphereRenderer.material.color;
-        }
-
-        if (rayInteractor == null)
-        {
-            Debug.LogError("Ray Interactor is not assigned!");
-        }
+        originalColor = sphereRenderer.material.color;
     }
 
     public void OnHoverEnter(HoverEnterEventArgs args)
     {
-        if (sphereRenderer != null)
-        {
-            sphereRenderer.material.color = highlightColor;
-            colorChanged = true;
- 
-        }
-        if (vrPointerInteraction != null)
-        {
-            vrPointerInteraction.OnHoverEnter(args);
-        }
+        sphereRenderer.material.color = highlightColor;
+        colorChanged = true;
+        vrPointerInteraction.OnHoverEnter(args);
     }
 
     public void OnHoverExit(HoverExitEventArgs args)
     {
-        if (sphereRenderer != null)
-        {
-            sphereRenderer.material.color = originalColor;
-            colorChanged = false;
+       
+        sphereRenderer.material.color = originalColor;
+        colorChanged = false;
 
-            if (rayInteractor != null && rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hitInfo))
-            {
-                Vector3 errorDirection = hitInfo.point - transform.position;
-                Debug.Log("Error Direction: " + errorDirection);
-            }
-            else
-            {
-                Debug.LogWarning("Ray Interactor did not hit anything.");
-            }
-        }
-        if (vrPointerInteraction != null)
+        if (rayInteractor != null && rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hitInfo))
         {
-            vrPointerInteraction.OnHoverExit(args);
+            Vector3 errorDirection = hitInfo.point - transform.position;
+            Debug.Log("Error Direction: " + errorDirection);
         }
+        else
+        {
+            Debug.LogWarning("Ray Interactor did not hit anything.");
+        }
+
+         vrPointerInteraction.OnHoverExit(args);
     }
 
     public void OnSelectEnter(SelectEnterEventArgs args)

@@ -34,7 +34,6 @@ public class VRPointerAndHandMover : MonoBehaviour
     public TMP_Text errorTimeText;
     private float totalErrorCorrectionTime = 0.0f;
     private int errorCount = 0;
-    private float errorStartTime;
 
 
     void Start()
@@ -47,18 +46,6 @@ public class VRPointerAndHandMover : MonoBehaviour
             originalColor = sphereRenderer.material.color;
         }
 
-        if (rayInteractor == null)
-        {
-            Debug.LogError("Ray Interactormissing");
-        }
-
-        if (handTransform == null)
-        {
-            Debug.LogError("Hand transform missing");
-            return;
-        }
-
-        //originalHandPosition = handTransform.localPosition;
 
         originalHandRotation = handTransform.localRotation;
 
@@ -163,7 +150,7 @@ public class VRPointerAndHandMover : MonoBehaviour
             sphereRenderer.material.color = originalColor;
             colorChanged = false;
         }
-        errorStartTime = Time.time;
+        //errorStartTime = Time.time;
         errorCount++;
 
 
