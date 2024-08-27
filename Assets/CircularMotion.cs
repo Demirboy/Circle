@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
@@ -10,12 +11,16 @@ public class CircularMotion : MonoBehaviour
 {
     public Transform center; // Reference to the center point
     public Transform cylinder; // Reference to the cylinder
+    private string currentSceneName;
     public float angularSpeed = 2.0f; // Speed of the rotation
+    private string player;
 
     private VRPointerInteraction vrPointerInteraction;
     public XRRayInteractor rayInteractor;
 
-    public int countdownValue = 2; // Initial countdown value
+    private int resetNumber = 0;
+    public int countdownValue = 2;
+    private int errorCount = 0; // Initial countdown value
     public TMP_Text countdownText; // UI Text element to display the countdown
     public TMP_Text accuracyText; // UI Text element to display the accuracy
     public TMP_Text pointTimeDisplay;
@@ -24,28 +29,37 @@ public class CircularMotion : MonoBehaviour
     public TMP_Text pointerPosition;
     public TMP_Text distance;
     public TMP_Text averageDistance;
+    public TMP_Text playerName;
+    public TMP_Text RecoveryTimeText;
+    public TMP_Text errorsOccured;// UI Text to display the average recovery time
 
+    private float lastPointingEndTime = 0f; // Time when the player stopped pointing
+    private float accuracy;
     private float radius;
     private float angle = 0f; // Current angle
     private float pointingTime = 0f; // Time pointing at the sphere in current rotation
     private float totalTime = 0f; // Total time of current rotation
     private bool isPointing = false; // Flag to check if pointing is active
     private bool isCounting = false;
-
-    private Vector3 zCorrectedPoint;
+    private bool errorCounted = false;
+    private Vector3 initialPosition;
 
     private List<float> accuracies = new List<float>();
     private List<float> posAccuracies = new List<float>();
     private List<string> rotationData = new List<string>();
+    private List<float> recoveryTimes = new List<float>(); // List to store recovery times
 
 
     void Start()
     {
+        currentSceneName = SceneManager.GetActiveScene().name;
 
         if (countdownText != null)
         {
-            countdownText.text = countdownValue.ToString();
+            countdownText.text = "Rotation Nr.: " + countdownValue.ToString();
         }
+
+        initialPosition = transform.position;
 
         // Calculate the initial position based on the cylinder's radius
         radius = cylinder.localScale.x * 0.5f;
@@ -53,14 +67,18 @@ public class CircularMotion : MonoBehaviour
         transform.position = new Vector3(0, -radius, 0) + center.position;
 
         vrPointerInteraction = GetComponent<VRPointerInteraction>();
-        
+
+        player = PlayerData.playerName;
+        playerName.text = "P: " + player;
+
     }
 
     void Update()
     {
+
         if (vrPointerInteraction.isRotating && !isCounting)
         {
-            StartCoroutine(CalculateDistanceEveryQuarterSecond());
+            StartCoroutine(CalculateDistance());
             isCounting = true;
         }
         
@@ -87,6 +105,7 @@ public class CircularMotion : MonoBehaviour
         if (angle >= 3 * Mathf.PI / 2)
         {
             angle -= 2 * Mathf.PI;
+            transform.position = initialPosition;
             CalculateAndDisplayAccuracy();
             CalculateAndDisplayPositionAccuracy();
             UpdateData();
@@ -98,16 +117,21 @@ public class CircularMotion : MonoBehaviour
         if (countdownValue <= 0)
         {
             StopGame();
+
+            foreach (string data in rotationData)
+            {
+                Debug.Log(data);
+            }
         }
     }
 
-    private IEnumerator CalculateDistanceEveryQuarterSecond()
+    private IEnumerator CalculateDistance()
     {
         // Continuously run the loop
         while (true)
         {
             // Display the sphere position
-            spherePosition.text = transform.position.ToString();
+            spherePosition.text = "Sp. Position: " + transform.position.ToString();
 
             // Perform the raycast and calculate the distance
             if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hitInfo))
@@ -115,19 +139,35 @@ public class CircularMotion : MonoBehaviour
                 // Correct the Z value and calculate the distance
                 Vector3 zCorrectedPoint = hitInfo.point;
                 zCorrectedPoint.z = 0;
-                pointerPosition.text = zCorrectedPoint.ToString();
+                pointerPosition.text = "Point. Position: " + zCorrectedPoint.ToString();
                 distance.text = Vector3.Distance(transform.position, zCorrectedPoint).ToString();
                 posAccuracies.Add(Vector3.Distance(transform.position, zCorrectedPoint));
             }
 
-            // Wait for 1/4th of a second (0.25 seconds)
+            //evey 10th of a sec
             yield return new WaitForSeconds(0.1f);
         }
     }
 
     void UpdateData()
     {
-        string dataLine = $"Rotation:{countdownValue}, TotalTime: {totalTimeDisplay.text}, PointingTime: {pointTimeDisplay.text}, Average Distance: {averageDistance.text}";
+  
+        string dataLine = $"Player: {player}, Scene: {currentSceneName}, Rotation: {countdownValue}, Total time: {totalTime:F2}, Pointing Time: {pointingTime:F2}, Accuracy: {accuracy:0.00}%, {averageDistance.text}, Error Count: {errorCount}";
+        rotationData.Add(dataLine);
+        PlayerData.trackingData.Add(dataLine);
+        foreach (float recoveryTime in recoveryTimes)
+        {
+            string recoveryData = $"Player: {player}, Scene: {currentSceneName}, RecoveryTime: {recoveryTime}";
+            PlayerData.circleRecoveryData.Add(recoveryData);
+        }
+        recoveryTimes.Clear();
+
+    }
+
+    public void resetHappened()
+    {
+        resetNumber++;
+        string dataLine = $"{resetNumber} Reset(s) happened";
         rotationData.Add(dataLine);
     }
 
@@ -145,7 +185,7 @@ public class CircularMotion : MonoBehaviour
         if (posAccuracies.Count > 0)
         {
             averagePositionAccuracy = posAccuracies.Average();
-            averageDistance.text = averagePositionAccuracy.ToString();
+            averageDistance.text = "Avg. Distance: " + averagePositionAccuracy.ToString();
         }
         posAccuracies.Clear();
     }
@@ -155,22 +195,25 @@ public class CircularMotion : MonoBehaviour
     {
         if (countdownText != null)
         {
-            countdownText.text = countdownValue.ToString();
+            countdownText.text = "Rotation Nr.: " + countdownValue.ToString();
         }
     }
 
     void CalculateAndDisplayAccuracy()
     {
-        float accuracy = (totalTime > 0) ? (pointingTime / totalTime) * 100f : 0f;
+
+        float roundedTotalTime = Mathf.Round(totalTime * 10f) / 10f;
+        float roundedPointingTime = Mathf.Round(pointingTime * 10f) / 10f;
+
+        accuracy = (roundedTotalTime > 0) ? (roundedPointingTime / roundedTotalTime) * 100f : 0f;
         accuracies.Add(accuracy);
 
         if (accuracyText != null)
         {
-            accuracyText.text = $"Accuracy: {accuracy:0.00}%";
+            accuracyText.text = $"Pointing Accuracy: {accuracy:0.00}%";
         }
 
     }
-
 
     void OnGUI()
     {
@@ -185,17 +228,40 @@ public class CircularMotion : MonoBehaviour
     {
         pointingTime = 0f;
         totalTime = 0f;
+        errorCount = 0;
     }
 
     public void StartPointing()
     {
         isPointing = true;
+
+        if (!errorCounted)
+        {
+            errorCounted = true;
+
+            if (lastPointingEndTime > 0)
+            {
+                float recoveryTime = Time.time - lastPointingEndTime;
+                recoveryTimes.Add(recoveryTime);
+                RecoveryTimeText.text = recoveryTime.ToString(); 
+            }
+        }
     }
 
     public void StopPointing()
     {
         isPointing = false;
+
+        if (errorCounted)
+        {
+            errorCount++;
+            errorsOccured.text = errorCount.ToString();
+            errorCounted = false;
+            lastPointingEndTime = Time.time; 
+        }
     }
+
+
 
     void StopGame()
     {
@@ -212,14 +278,8 @@ public class CircularMotion : MonoBehaviour
             accuracyText.text = $"Average Accuracy: {averageAccuracy:0.00}%";
         }
 
-        // Get reference to VRPointerAndHandMover and display error correction time
-        /*
-        VRPointerAndHandMover handMover = GetComponent<VRPointerAndHandMover>();
-        if (handMover != null)
-        {
-            handMover.DisplayErrorCorrectionTime();
-        }
-        */
+        
+
     }
 }
 

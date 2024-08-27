@@ -1,0 +1,18 @@
+Position reset 1
+Player: 01, Scene: Followcircle - Regular, Rotation: 5, Total time: 12,6, Pointing Time: 4,8, Accuracy: 38,10%, Avg. Distance: 0,08161803
+Player: 01, Scene: Followcircle - Regular, Rotation: 4, Total time: 12,6, Pointing Time: 5,5, Accuracy: 43,65%, Avg. Distance: 0,07168942
+Player: 01, Scene: Followcircle - Regular, Rotation: 3, Total time: 12,6, Pointing Time: 4,6, Accuracy: 36,51%, Avg. Distance: 0,08472636
+Player: 01, Scene: Followcircle - Regular, Rotation: 2, Total time: 12,6, Pointing Time: 5,8, Accuracy: 46,03%, Avg. Distance: 0,06934451
+Player: 01, Scene: Followcircle - Regular, Rotation: 1, Total time: 12,6, Pointing Time: 3,8, Accuracy: 30,16%, Avg. Distance: 0,08869075
+Position reset 1
+Player: 01, Scene: Followcircle - Amp, Rotation: 5, Total time: 12,6, Pointing Time: 7,3, Accuracy: 57,94%, Avg. Distance: 0,0593506
+Player: 01, Scene: Followcircle - Amp, Rotation: 4, Total time: 12,6, Pointing Time: 8,8, Accuracy: 69,84%, Avg. Distance: 0,04763418
+Player: 01, Scene: Followcircle - Amp, Rotation: 3, Total time: 12,6, Pointing Time: 6,7, Accuracy: 53,17%, Avg. Distance: 0,06596816
+Player: 01, Scene: Followcircle - Amp, Rotation: 2, Total time: 12,6, Pointing Time: 7,7, Accuracy: 61,11%, Avg. Distance: 0,0608519
+Player: 01, Scene: Followcircle - Amp, Rotation: 1, Total time: 12,6, Pointing Time: 8,4, Accuracy: 66,67%, Avg. Distance: 0,05383416
+Position reset 1
+Player: 01, Scene: Followcircle - Arrow, Rotation: 5, Total time: 12,6, Pointing Time: 7,7, Accuracy: 61,11%, Avg. Distance: 0,06233595
+Player: 01, Scene: Followcircle - Arrow, Rotation: 4, Total time: 12,6, Pointing Time: 4,4, Accuracy: 34,92%, Avg. Distance: 0,08794401
+Player: 01, Scene: Followcircle - Arrow, Rotation: 3, Total time: 12,6, Pointing Time: 8,4, Accuracy: 66,67%, Avg. Distance: 0,05193029
+Player: 01, Scene: Followcircle - Arrow, Rotation: 2, Total time: 12,6, Pointing Time: 7,1, Accuracy: 56,35%, Avg. Distance: 0,05556352
+Player: 01, Scene: Followcircle - Arrow, Rotation: 1, Total time: 12,6, Pointing Time: 9,0, Accuracy: 71,43%, Avg. Distance: 0,04439166

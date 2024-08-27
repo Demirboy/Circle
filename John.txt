@@ -1,0 +1,7 @@
+Position reset 1
+Position reset 1
+Player: John, Scene: Followcircle - Regular, Rotation: 5, Total time: 12,6, Pointing Time: 1,6, Accuracy: 12,70%, Avg. Distance: 0,3853285
+Player: John, Scene: Followcircle - Regular, Rotation: 4, Total time: 12,6, Pointing Time: 0,2, Accuracy: 1,59%, Avg. Distance: 1,247144
+Player: John, Scene: Followcircle - Regular, Rotation: 3, Total time: 12,6, Pointing Time: 0,2, Accuracy: 1,59%, Avg. Distance: 0,4782793
+Player: John, Scene: Followcircle - Regular, Rotation: 2, Total time: 12,6, Pointing Time: 0,1, Accuracy: 0,79%, Avg. Distance: 0,4683049
+Player: John, Scene: Followcircle - Regular, Rotation: 1, Total time: 12,6, Pointing Time: 0,6, Accuracy: 4,76%, Avg. Distance: 0,3554186

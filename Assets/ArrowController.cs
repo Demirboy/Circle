@@ -13,6 +13,9 @@ public class ArrowController : MonoBehaviour
     private LineRenderer lineRenderer;
     private GameObject arrowheadInstance;
 
+    public float startWidth = 0.01f;
+    public float endWidth = 0.02f;
+
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -21,8 +24,8 @@ public class ArrowController : MonoBehaviour
             lineRenderer = gameObject.AddComponent<LineRenderer>();
         }
         lineRenderer.positionCount = 2;
-        lineRenderer.startWidth = 0.02f;
-        lineRenderer.endWidth = 0.02f;
+        lineRenderer.startWidth = startWidth;
+        lineRenderer.endWidth = endWidth;
 
         if (arrowheadPrefab != null)
         {

@@ -94,6 +94,7 @@ public class VRPointerAndHandMover : MonoBehaviour
             handTransform.localRotation = originalHandRotation;
             return;
         }
+        
 
 
         float normalizedError = Mathf.Clamp01((errorDistance - errorMargin) / (maxErrorDistance - errorMargin));
@@ -133,7 +134,7 @@ public class VRPointerAndHandMover : MonoBehaviour
 
         if (sphereRenderer != null)
         {
-            sphereRenderer.material.color = highlightColor;
+            //sphereRenderer.material.color = highlightColor;
             colorChanged = true;
         }
         if (vrPointerInteraction != null)
@@ -147,7 +148,7 @@ public class VRPointerAndHandMover : MonoBehaviour
     {
         if (sphereRenderer != null)
         {
-            sphereRenderer.material.color = originalColor;
+            //sphereRenderer.material.color = originalColor;
             colorChanged = false;
         }
         //errorStartTime = Time.time;

@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Followcircle - ErrorExag.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Start.unity
+    guid: ef41762a453a8654e8ad533b586c1c68
   - enabled: 1
     path: Assets/Scenes/Followcircle - Regular.unity
     guid: 90b49b90c0795aa47bdc2a5b9f984c07
   - enabled: 1
     path: Assets/Scenes/Followcircle - Arrow.unity
-    guid: 05aeb454f14262940bc9f2dd5a474b3e
+    guid: 7f91860e4db4511459e14fdc955e4ee0
+  - enabled: 1
+    path: Assets/Scenes/Followcircle - Amp.unity
+    guid: 2544929d7b2d7884bafc93e05e5f5dd3
   - enabled: 1
     path: Assets/Scenes/Wireloop Arrow.unity
     guid: 2cfc66981663c8847aa9817a55c2ace3
@@ -23,6 +26,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Wireloop Normal.unity
     guid: eb4203ba8758fb549b26c672a1fa8179
+  - enabled: 1
+    path: Assets/Scenes/WireLoop Arrow Alt.unity
+    guid: 3eef3c49279c0534186a8299e7a500de
+  - enabled: 1
+    path: Assets/Scenes/WireLoop Exaggerated Alt.unity
+    guid: 3f84c029b56c2c8469238461094056dd
+  - enabled: 1
+    path: Assets/Scenes/WireLoop Normal Alt.unity
+    guid: 4754d96d76f1131478b30f5909709fc4
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: deccf3c395f14694d8bae6f9676670ab,
       type: 2}
