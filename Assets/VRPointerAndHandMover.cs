@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class VRPointerAndHandMover : MonoBehaviour
@@ -38,6 +39,7 @@ public class VRPointerAndHandMover : MonoBehaviour
 
     void Start()
     {
+        PlayerData.currentScene = SceneManager.GetActiveScene().name;
         sphereRenderer = GetComponent<Renderer>();
         vrPointerInteraction = GetComponent<VRPointerInteraction>();
 

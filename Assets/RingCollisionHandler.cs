@@ -54,11 +54,12 @@ public class RingCollisionHandler : MonoBehaviour
     private int errorsOccured = 0;
     private bool isTracking = false;
     private string trackingData = "";
-    public string player;
+    private Vector3 closestPointOnWire;
 
     private void Start()
     {
-        player = PlayerData.playerName;
+        PlayerData.currentScene = SceneManager.GetActiveScene().name;
+        
         handleReturnXR = GetComponent<HandleReturnXR>();
 
         if (ringRenderer != null)
@@ -102,7 +103,7 @@ public class RingCollisionHandler : MonoBehaviour
         if (isHeld)
         {
             IsMidpointInsideWire();
-            Vector3 closestPointOnWire = GetClosestPointOnWire(ringMidpoint.position);
+            closestPointOnWire = GetClosestPointOnWire(ringMidpoint.position);
             float lineLength = CalculateLineLength(ringMidpoint.position, closestPointOnWire) + 0.01f;
             if (lineLength > 0.01f && displayArrow)
             {
@@ -118,6 +119,8 @@ public class RingCollisionHandler : MonoBehaviour
             ApplyExaggerationEffect(lineLength, lineDirection);
 
             TrackMovement(lineLength);
+            string positionals = $"Player: {PlayerData.playerName}, {PlayerData.currentScene}, Midpoint: {ringMidpoint.position}, Closest Point Wire {closestPointOnWire}, Time: {trackingTime}";
+            PlayerData.positionals.Add(positionals);
         } 
             else
         {
@@ -187,7 +190,10 @@ public class RingCollisionHandler : MonoBehaviour
                 {
                     errorsOccured++;
                     errorsOccuredText.text = "Errors Occured: " + errorsOccured.ToString();
+
                     errorCooldownTimer = 0f; // Reset cooldown timer
+                    string errorPositions = $"Player: {PlayerData.playerName}, {PlayerData.currentScene}, Midpoint: {ringMidpoint.position}, Closest Point Wire {closestPointOnWire}, Time: {trackingTime}";
+                    PlayerData.ringErrors.Add(errorPositions);
                 }
             }
 
@@ -209,7 +215,7 @@ public class RingCollisionHandler : MonoBehaviour
     public void FinalizeTrackingData()
     {
         float averageLineLength = GetAverageLineLength();
-        trackingData += $"Player: {player}, Scene: {SceneManager.GetActiveScene().name}, Total Time: {trackingTime:F2}, Total Error Time: {errorStateTime:F2},Cumulative Distance: {cumulativeLineLength}, Average Distance: {averageLineLength}, Errors Occured: {errorsOccured}";
+        trackingData += $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, Total Time: {trackingTime:F2}, Total Error Time: {errorStateTime:F2},Cumulative Distance: {cumulativeLineLength}, Average Distance: {averageLineLength}, Errors Occured: {errorsOccured}";
         Debug.Log(trackingData);
         PlayerData.trackingData.Add(trackingData);
     }

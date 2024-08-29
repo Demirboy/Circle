@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wire2enabled : MonoBehaviour
+public class WireEnabled : MonoBehaviour
 {
     public bool isEnabled = false;
     public GameObject wire;

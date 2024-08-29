@@ -11,7 +11,6 @@ public class CircularMotion : MonoBehaviour
 {
     public Transform center; // Reference to the center point
     public Transform cylinder; // Reference to the cylinder
-    private string currentSceneName;
     public float angularSpeed = 2.0f; // Speed of the rotation
     private string player;
 
@@ -52,7 +51,6 @@ public class CircularMotion : MonoBehaviour
 
     void Start()
     {
-        currentSceneName = SceneManager.GetActiveScene().name;
 
         if (countdownText != null)
         {
@@ -111,6 +109,7 @@ public class CircularMotion : MonoBehaviour
             UpdateData();
             countdownValue--;
             UpdateCountdownText();
+            angularSpeed += 0.15f;
             ResetTracking();
         }
 
@@ -132,7 +131,7 @@ public class CircularMotion : MonoBehaviour
         {
             // Display the sphere position
             spherePosition.text = "Sp. Position: " + transform.position.ToString();
-
+            
             // Perform the raycast and calculate the distance
             if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hitInfo))
             {
@@ -142,22 +141,24 @@ public class CircularMotion : MonoBehaviour
                 pointerPosition.text = "Point. Position: " + zCorrectedPoint.ToString();
                 distance.text = Vector3.Distance(transform.position, zCorrectedPoint).ToString();
                 posAccuracies.Add(Vector3.Distance(transform.position, zCorrectedPoint));
+                string positional = $"Player: {PlayerData.currentScene}, Rotation: {countdownValue}, Pointer:{zCorrectedPoint}, Sphere:{transform.position}, Time: {totalTime}";
+                PlayerData.positionals.Add(positional);
             }
 
-            //evey 10th of a sec
-            yield return new WaitForSeconds(0.1f);
+            //evey 20th of a sec
+            yield return new WaitForSeconds(0.05f);
         }
     }
 
     void UpdateData()
     {
   
-        string dataLine = $"Player: {player}, Scene: {currentSceneName}, Rotation: {countdownValue}, Total time: {totalTime:F2}, Pointing Time: {pointingTime:F2}, Accuracy: {accuracy:0.00}%, {averageDistance.text}, Error Count: {errorCount}";
+        string dataLine = $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, Rotation: {countdownValue}, Total time: {totalTime:F2}, Pointing Time: {pointingTime:F2}, Accuracy: {accuracy:0.00}%, {averageDistance.text}, Error Count: {errorCount}";
         rotationData.Add(dataLine);
         PlayerData.trackingData.Add(dataLine);
         foreach (float recoveryTime in recoveryTimes)
         {
-            string recoveryData = $"Player: {player}, Scene: {currentSceneName}, RecoveryTime: {recoveryTime}";
+            string recoveryData = $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, RecoveryTime: {recoveryTime}";
             PlayerData.circleRecoveryData.Add(recoveryData);
         }
         recoveryTimes.Clear();
