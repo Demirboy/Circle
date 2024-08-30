@@ -35,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WireLoop Normal Alt.unity
     guid: 4754d96d76f1131478b30f5909709fc4
+  - enabled: 1
+    path: Assets/Scenes/Questionaire.unity
+    guid: bc465713fe212a843a641d7c1cc6779e
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: deccf3c395f14694d8bae6f9676670ab,
       type: 2}
