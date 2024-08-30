@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class RingCollisionHandler : MonoBehaviour
 {
@@ -192,7 +193,7 @@ public class RingCollisionHandler : MonoBehaviour
                     errorsOccuredText.text = "Errors Occured: " + errorsOccured.ToString();
 
                     errorCooldownTimer = 0f; // Reset cooldown timer
-                    string errorPositions = $"Player: {PlayerData.playerName}, {PlayerData.currentScene}, Midpoint: {ringMidpoint.position}, Closest Point Wire {closestPointOnWire}, Time: {trackingTime}";
+                    string errorPositions = $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, Midpoint: {ringMidpoint.position}, Closest Point Wire {closestPointOnWire}, Time: {trackingTime}, Timestamp: {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
                     PlayerData.ringErrors.Add(errorPositions);
                 }
             }
@@ -208,6 +209,7 @@ public class RingCollisionHandler : MonoBehaviour
             {
                 isTracking = false;
                 FinalizeTrackingData();
+                enabled = false;
             }
         }
     }
@@ -215,7 +217,7 @@ public class RingCollisionHandler : MonoBehaviour
     public void FinalizeTrackingData()
     {
         float averageLineLength = GetAverageLineLength();
-        trackingData += $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, Total Time: {trackingTime:F2}, Total Error Time: {errorStateTime:F2},Cumulative Distance: {cumulativeLineLength}, Average Distance: {averageLineLength}, Errors Occured: {errorsOccured}";
+        trackingData += $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, Total Time: {trackingTime}, Total Error Time: {errorStateTime}, Cumulative Distance: {cumulativeLineLength}, Average Distance: {averageLineLength}, Errors Occured: {errorsOccured}, Timestamp: {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
         Debug.Log(trackingData);
         PlayerData.trackingData.Add(trackingData);
     }

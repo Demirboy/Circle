@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using UnityEngine.XR.Interaction.Toolkit;
+using System;
 
 public class CircularMotion : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class CircularMotion : MonoBehaviour
     public XRRayInteractor rayInteractor;
 
     private int resetNumber = 0;
-    public int countdownValue = 2;
+    private int countdownValue = 6;
     private int errorCount = 0; // Initial countdown value
     public TMP_Text countdownText; // UI Text element to display the countdown
     public TMP_Text accuracyText; // UI Text element to display the accuracy
@@ -141,7 +142,7 @@ public class CircularMotion : MonoBehaviour
                 pointerPosition.text = "Point. Position: " + zCorrectedPoint.ToString();
                 distance.text = Vector3.Distance(transform.position, zCorrectedPoint).ToString();
                 posAccuracies.Add(Vector3.Distance(transform.position, zCorrectedPoint));
-                string positional = $"Player: {PlayerData.currentScene}, Rotation: {countdownValue}, Pointer:{zCorrectedPoint}, Sphere:{transform.position}, Time: {totalTime}";
+                string positional = $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, Rotation: {countdownValue}, Pointer:{zCorrectedPoint}, Sphere:{transform.position}, Time: {totalTime}, Timestamp: {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
                 PlayerData.positionals.Add(positional);
             }
 
@@ -153,12 +154,12 @@ public class CircularMotion : MonoBehaviour
     void UpdateData()
     {
   
-        string dataLine = $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, Rotation: {countdownValue}, Total time: {totalTime:F2}, Pointing Time: {pointingTime:F2}, Accuracy: {accuracy:0.00}%, {averageDistance.text}, Error Count: {errorCount}";
+        string dataLine = $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, Rotation: {countdownValue}, Total time: {totalTime}, Pointing Time: {pointingTime}, Accuracy: {accuracy:0.00}%, {averageDistance.text}, Error Count: {errorCount}, Timestamp: {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
         rotationData.Add(dataLine);
         PlayerData.trackingData.Add(dataLine);
         foreach (float recoveryTime in recoveryTimes)
         {
-            string recoveryData = $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, RecoveryTime: {recoveryTime}";
+            string recoveryData = $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, RecoveryTime: {recoveryTime}, Timestamp: {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
             PlayerData.circleRecoveryData.Add(recoveryData);
         }
         recoveryTimes.Clear();
