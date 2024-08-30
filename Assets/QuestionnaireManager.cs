@@ -28,11 +28,19 @@ public class QuestionnaireManager : MonoBehaviour
     {
         questions = new List<QuestionData>
             {
-                new QuestionData { question = "How natural did your interactions with the virtual environment feel?\n\n(Wie nat�rlich hat sich Ihre Interaktion mit der virtuellen Umgebung angef�hlt?)", weakScale = "Very Unnatural\n\n(Sehr Unnat�rlich)", strongScale = "Very Natural\n\n(Sehr Nat�rlich)" },
-                new QuestionData { question = "How immersive was the experience?", weakScale = "Not Immersive", strongScale = "Very Immersive" },
-                new QuestionData { question = "How immersive was the experience?", weakScale = "Not Immersive", strongScale = "Very Immersive" },
-                new QuestionData { question = "How immersive was the experience?", weakScale = "Not Immersive", strongScale = "Very Immersive" },
+                new QuestionData { question = "How natural did your interactions with the virtual environment feel?\n\n(Wie natürlich hat sich Ihre Interaktion mit der virtuellen Umgebung angefühlt?)", weakScale = "Very Unnatural\n\n(Sehr Unnatürlich)", strongScale = "Very Natural\n\n(Sehr Natürlich)" },
 
+                new QuestionData { question = "To what extent did you feel you were 'inside' the virtual environment rather than just observing it?\n\n(Inwieweit hatten Sie das Gefühl, dass Sie sich 'innerhalb' der virtuellen Umgebung befanden, anstatt sie nur zu beobachten?)", weakScale = "Not at all\n\n(Überhaupt nicht)", strongScale = "Completely\n\n(Vollständig)" },
+
+                new QuestionData { question = "Did you feel as though you were part of the virtual environment?\n\n(Hatten Sie das Gefühl, Teil der virtuellen Umgebung zu sein?)", weakScale = "Not at all\n\n(Überhaupt nicht)", strongScale = "Completely\n\n(Vollständig)" },
+
+                new QuestionData { question = "How immersive did you find the virtual environment?\n\n(Wie immersiv fanden Sie die virtuelle Umgebung?)", weakScale = "Not immersive at all\n\n(Überhaupt nicht immersiv)", strongScale = "Completely immersive\n\n(Vollständig immersiv)" },
+
+                new QuestionData { question = "Did the quality of the graphics and sound in the VR environment contribute to your feeling of immersion?\n\n(Hat die Qualität der Grafik und des Sounds in der VR-Umgebung zu Ihrem Gefühl der Immersion beigetragen?)", weakScale = "Not at all\n\n(Überhaupt nicht)", strongScale = "Completely\n\n(Vollständig)" },
+
+                new QuestionData { question = "Did you experience any discomfort or nausea during the VR experience?\n\n(Haben Sie während der VR-Erfahrung Unbehagen oder Übelkeit verspürt?)", weakScale = "None at all\n\n(Überhaupt nicht)", strongScale = "Severe\n\n(Stark)" },
+
+                new QuestionData { question = "How would you rate your overall comfort level while using the VR system?\n\n(Wie würden Sie Ihr allgemeines Komfortniveau bei der Nutzung des VR-Systems bewerten?)", weakScale = "Very uncomfortable\n\n(Sehr unangenehm)", strongScale = "Very comfortable\n\n(Sehr angenehm)" };
             };
         DisplayQuestion();
     }
@@ -65,8 +73,9 @@ public class QuestionnaireManager : MonoBehaviour
         if (currentQuestionIndex < questions.Count)
         {
             // Record the answer
-            string answer = questions[currentQuestionIndex].question + ": " + (buttonIndex + 1).ToString();
+            string answer = PlayerData.currentscene + ", " questions[currentQuestionIndex].question + ": " + (buttonIndex + 1).ToString();
             answers.Add(answer);
+            PlayerData.questionaireAnswers.Add(answer);
             Debug.Log(answer);
 
             // Move to the next question
