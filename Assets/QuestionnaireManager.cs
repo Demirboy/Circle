@@ -28,33 +28,33 @@ public class QuestionnaireManager : MonoBehaviour
     {
         questions = new List<QuestionData>
             {
-                new QuestionData { question = "In the computer generated world I had a sense of 'being there'\n\n(In der computererzeugten Welt hatte ich den Eindruck, dort gewesen zu sein...)", weakScale = "not at all\n\n(überhaupt nicht)", strongScale = "very much\n\n(sehr stark)" },
+                new QuestionData { question = "In the computer generated world I had a sense of 'being there'\n(In der computererzeugten Welt hatte ich den Eindruck, dort gewesen zu sein...)", weakScale = "not at all\n(überhaupt nicht)", strongScale = "very much\n(sehr stark)" },
 
-                new QuestionData { question = "Somehow I felt that the virtual world surrounded me.\n\n(Ich hatte das Gefühl, daß die virtuelle Umgebung hinter mir weitergeht.)", weakScale = "fully disagree\n\n(trifft gar nicht zu)", strongScale = "fully agree\n\n(trifft völlig zu)" },
+                new QuestionData { question = "Somehow I felt that the virtual world surrounded me.\n(Ich hatte das Gefühl, daß die virtuelle Umgebung hinter mir weitergeht.)", weakScale = "fully disagree\n(trifft gar nicht zu)", strongScale = "fully agree\n(trifft völlig zu)" },
 
-                new QuestionData { question = "I felt like I was just perceiving pictures.\n\n(Ich hatte das Gefühl, nur Bilder zu sehen.)", weakScale = "fully disagree\n\n(trifft gar nicht zu)", strongScale = "fully agree\n\n(trifft völlig zu)" },
+                new QuestionData { question = "I felt like I was just perceiving pictures.\n(Ich hatte das Gefühl, nur Bilder zu sehen.)", weakScale = "fully disagree\n(trifft gar nicht zu)", strongScale = "fully agree\n(trifft völlig zu)" },
 
-                new QuestionData { question = "I did not feel present in the virtual space.\n\n(Ich hatte nicht das Gefühl, in dem virtuellen Raum zu sein.)", weakScale = "did not feel\n\n(hatte nicht das Gefühl)", strongScale = "felt present\n\n(hatte das Gefühl)" },
+                new QuestionData { question = "I did not feel present in the virtual space.\n(Ich hatte nicht das Gefühl, in dem virtuellen Raum zu sein.)", weakScale = "did not feel\n(hatte nicht das Gefühl)", strongScale = "felt present\n(hatte das Gefühl)" },
 
-                new QuestionData { question = "I had a sense of acting in the virtual space, rather than operating something from outside.\n\n(Ich hatte das Gefühl, in dem virtuellen Raum zu handeln statt etwas von außen zu bedienen.)", weakScale = "fully disagree\n\n(trifft gar nicht zu)", strongScale = "fully agree\n\n(trifft völlig zu)" },
+                new QuestionData { question = "I had a sense of acting in the virtual space, rather than operating something from outside.\n(Ich hatte das Gefühl, in dem virtuellen Raum zu handeln statt etwas von außen zu bedienen.)", weakScale = "fully disagree\n(trifft gar nicht zu)", strongScale = "fully agree\n(trifft völlig zu)" },
 
-                new QuestionData { question = "I felt present in the virtual space.\n\n(Ich fühlte mich im virtuellen Raum anwesend.)", weakScale = "fully disagree\n\n(trifft gar nicht zu)", strongScale = "fully agree\n\n(trifft völlig zu)" },
+                new QuestionData { question = "I felt present in the virtual space.\n(Ich fühlte mich im virtuellen Raum anwesend.)", weakScale = "fully disagree\n(trifft gar nicht zu)", strongScale = "fully agree\n(trifft völlig zu)" },
 
-                new QuestionData { question = "How aware were you of the real world surrounding while navigating in the virtual world? (i.e. sounds, room temperature, other people, etc.)?\n\n(Wie bewußt war Ihnen die reale Welt, während Sie sich durch die virtuelle Welt bewegten (z.B. Geräusche, Raumtemperatur, andere Personen etc.)?)", weakScale = "extremely aware\n\n(extrem bewußt)", strongScale = "not aware at all\n\n(unbewußt)" },
+                new QuestionData { question = "How aware were you of the real world surrounding while navigating in the virtual world? (i.e. sounds, room temperature, other people, etc.)?\n(Wie bewußt war Ihnen die reale Welt, während Sie sich durch die virtuelle Welt bewegten (z.B. Geräusche, Raumtemperatur, andere Personen etc.)?)", weakScale = "extremely aware\n(extrem bewußt)", strongScale = "not aware at all\n(unbewußt)" },
 
-                new QuestionData { question = "I was not aware of my real environment.\n\n(Meine reale Umgebung war mir nicht mehr bewußt.)", weakScale = "fully disagree\n\n(trifft gar nicht zu)", strongScale = "fully agree\n\n(trifft völlig zu)" },
+                new QuestionData { question = "I was not aware of my real environment.\n(Meine reale Umgebung war mir nicht mehr bewußt.)", weakScale = "fully disagree\n(trifft gar nicht zu)", strongScale = "fully agree\n(trifft völlig zu)" },
 
-                new QuestionData { question = "I still paid attention to the real environment.\n\n(Ich achtete noch auf die reale Umgebung.)", weakScale = "fully disagree\n\n(trifft gar nicht zu)", strongScale = "fully agree\n\n(trifft völlig zu)" },
+                new QuestionData { question = "I still paid attention to the real environment.\n(Ich achtete noch auf die reale Umgebung.)", weakScale = "fully disagree\n(trifft gar nicht zu)", strongScale = "fully agree\n(trifft völlig zu)" },
 
-                new QuestionData { question = "I was completely captivated by the virtual world.\n\n(Meine Aufmerksamkeit war von der virtuellen Welt völlig in Bann gezogen.)", weakScale = "fully disagree\n\n(trifft gar nicht zu)", strongScale = "fully agree\n\n(trifft völlig zu)" },
+                new QuestionData { question = "I was completely captivated by the virtual world.\n(Meine Aufmerksamkeit war von der virtuellen Welt völlig in Bann gezogen.)", weakScale = "fully disagree\n(trifft gar nicht zu)", strongScale = "fully agree\n(trifft völlig zu)" },
 
-                new QuestionData { question = "How real did the virtual world seem to you?\n\n(Wie real erschien Ihnen die virtuelle Umgebung?)", weakScale = "completely real\n\n(vollkommen real)", strongScale = "not real at all\n\n(gar nicht real)" },
+                new QuestionData { question = "How real did the virtual world seem to you?\n(Wie real erschien Ihnen die virtuelle Umgebung?)", weakScale = "completely real\n(vollkommen real)", strongScale = "not real at all\n(gar nicht real)" },
 
-                new QuestionData { question = "How much did your experience in the virtual environment seem consistent with your real world experience?\n\n(Wie sehr glich Ihr Erleben der virtuellen Umgebung dem Erleben einer realen Umgebung?)", weakScale = "not consistent\n\n(überhaupt nicht)", strongScale = "very consistent\n\n(vollständig)" },
+                new QuestionData { question = "How much did your experience in the virtual environment seem consistent with your real world experience?\n(Wie sehr glich Ihr Erleben der virtuellen Umgebung dem Erleben einer realen Umgebung?)", weakScale = "not consistent\n(überhaupt nicht)", strongScale = "very consistent\n(vollständig)" },
 
-                new QuestionData { question = "How real did the virtual world seem to you?\n\n(Wie real erschien Ihnen die virtuelle Welt?)", weakScale = "about as real as an imagined world\n\n(wie eine vorgestellte Welt)", strongScale = "indistinguishable from the real world\n\n(nicht zu unterscheiden von der realen Welt)" },
+                new QuestionData { question = "How real did the virtual world seem to you?\n(Wie real erschien Ihnen die virtuelle Welt?)", weakScale = "about as real as an imagined world\n(wie eine vorgestellte Welt)", strongScale = "indistinguishable from the real world\n(nicht zu unterscheiden von der r. Welt)" },
 
-                new QuestionData { question = "The virtual world seemed more realistic than the real world.\n\n(Die virtuelle Welt erschien mir wirklicher als die reale Welt.)", weakScale = "fully disagree\n\n(trifft gar nicht zu)", strongScale = "fully agree\n\n(trifft völlig zu)" }
+                new QuestionData { question = "The virtual world seemed more realistic than the real world.\n(Die virtuelle Welt erschien mir wirklicher als die reale Welt.)", weakScale = "fully disagree\n(trifft gar nicht zu)", strongScale = "fully agree\n(trifft völlig zu)" }
 
             };
         DisplayQuestion();
@@ -88,7 +88,7 @@ public class QuestionnaireManager : MonoBehaviour
         if (currentQuestionIndex < questions.Count)
         {
             // Record the answer
-            string answer = PlayerData.currentScene + ", " + questions[currentQuestionIndex].question + ": " + (buttonIndex + 1).ToString();
+            string answer = PlayerData.playerName + ", " + PlayerData.currentScene + ", " + questions[currentQuestionIndex].question + "\nAnswer:  " + (buttonIndex ).ToString();
             answers.Add(answer);
             PlayerData.questionaireAnswers.Add(answer);
             Debug.Log(answer);
@@ -121,7 +121,7 @@ public class QuestionnaireManager : MonoBehaviour
         else
         {
             // No more questions, leave buttons disabled
-            questionText.text = "Thank you, please continue\n\nVielen dank, fahren sie fort.";
+            questionText.text = "Thank you, please continue\nVielen dank, fahren sie fort.";
             weakScaleText.text = "";
             strongScaleText.text = "";
         }

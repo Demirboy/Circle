@@ -29,7 +29,6 @@ public class CircularMotion : MonoBehaviour
     public TMP_Text pointerPosition;
     public TMP_Text distance;
     public TMP_Text averageDistance;
-    public TMP_Text playerName;
     public TMP_Text RecoveryTimeText;
     public TMP_Text errorsOccured;// UI Text to display the average recovery time
 
@@ -68,7 +67,6 @@ public class CircularMotion : MonoBehaviour
         vrPointerInteraction = GetComponent<VRPointerInteraction>();
 
         player = PlayerData.playerName;
-        playerName.text = "P: " + player;
 
     }
 
@@ -147,7 +145,7 @@ public class CircularMotion : MonoBehaviour
             }
 
             //evey 20th of a sec
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.00f);
         }
     }
 
@@ -159,7 +157,7 @@ public class CircularMotion : MonoBehaviour
         PlayerData.trackingData.Add(dataLine);
         foreach (float recoveryTime in recoveryTimes)
         {
-            string recoveryData = $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, RecoveryTime: {recoveryTime}, Timestamp: {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+            string recoveryData = $"Player: {PlayerData.playerName}, Scene: {PlayerData.currentScene}, Rotation: {countdownValue}, RecoveryTime: {recoveryTime}, Timestamp: {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
             PlayerData.circleRecoveryData.Add(recoveryData);
         }
         recoveryTimes.Clear();
