@@ -209,6 +209,27 @@ public class RingCollisionHandler : MonoBehaviour
             {
                 isTracking = false;
                 FinalizeTrackingData();
+
+                // Find all GameObjects with the tag "Start"
+                GameObject[] startObjects = GameObject.FindGameObjectsWithTag("Start");
+
+                // Loop through each GameObject
+                foreach (GameObject obj in startObjects)
+                {
+                    // Check if the object itself has a Renderer and change its color
+                    Renderer objRenderer = obj.GetComponent<Renderer>();
+                    if (objRenderer != null)
+                    {
+                        objRenderer.material.color = Color.green;
+                    }
+
+                    // If it has child objects, change their color as well
+                    Renderer[] childRenderers = obj.GetComponentsInChildren<Renderer>();
+                    foreach (Renderer childRenderer in childRenderers)
+                    {
+                        childRenderer.material.color = Color.green;
+                    }
+                }
                 enabled = false;
             }
         }
